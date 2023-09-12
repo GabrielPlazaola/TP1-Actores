@@ -1,0 +1,27 @@
+import pykka
+
+GetMessages = object()
+
+
+class PlainActor(pykka.ThreadingActor):
+    def __init__(self):
+        super().__init__()
+        self.stored_messages = []
+
+    def on_receive(self, message):
+        if message is GetMessages:
+            return self.stored_messages
+        else:
+            self.stored_messages.append(message)
+
+
+if __name__ == "__main__":
+    actor = PlainActor.start()
+    actor2 = PlainActor.start()
+    actor.tell({"no": "Norway", "se": "Sweden"})
+    actor2.tell({"si": "No", "se": "Sw"})
+    actor.tell({"a": 3, "b": 4, "c": 5})
+    actor2.tell({"a": 6, "b": 8, "c": 10})
+    #print(actor.ask(GetMessages))
+    actor.stop()
+    actor2.stop()

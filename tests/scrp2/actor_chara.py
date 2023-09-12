@@ -3,7 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-# Define un actor
+# Define un actor remoto
 @ray.remote
 class MyActorChara:
     def __init__(self):
@@ -23,7 +23,20 @@ class MyActorChara:
         num = 1
 
         caracsbase = ["PS","Ataque","Defensa","At. esp.","Def. esp.","Velocidad"]
-        num = caracsbase.index(carac) + 1
+        num = caracsbase.index(carac) - 1
+
+        if carac == "PS":
+            num = 1
+        elif carac == "Ataque":
+            num = 2
+        elif carac == "Defensa":
+            num = 3
+        elif carac == "At. esp.":
+            num = 4
+        elif carac == "Def. esp.":
+            num = 5
+        elif carac == "Velocidad":
+            num = 6
 
         # Verificar si la solicitud fue exitosa
         if response.status_code == 200:

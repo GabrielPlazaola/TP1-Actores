@@ -1,7 +1,7 @@
 import ray
 import time
-from actor_gen import MyActorGen  # Importa el actor
-from actor_chara import MyActorChara  # Importa el actor
+from actor_gen import MyActorGen  # Importa el actor desde el Archivo 2
+from actor_chara import MyActorChara  # Importa el actor desde el Archivo 3
 from top import top_10_pokemon
 from tabulate import tabulate
 
@@ -19,7 +19,7 @@ tipos = ['Fuego','Agua']
 #Caracteristica a tomar
 caracteristica = "Velocidad"
 
-# Crea varias instancias de MyActor
+# Crea varias instancias de MyActor en diferentes procesos
 actors = [MyActorGen.remote() for _ in range(len(gens))]
 
 # Llama a los métodos de los actores en paralelo
@@ -32,7 +32,7 @@ for i, result in enumerate(results):
         lista_poke.append(a)
 #print(lista_poke)
 
-# Crea varias instancias de MyActorChara
+# Crea varias instancias de MyActor en diferentes procesos
 actors2 = [MyActorChara.remote() for _ in range(len(lista_poke))]
 
 # Llama a los métodos de los actores en paralelo
