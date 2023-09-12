@@ -3,7 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-# Define un actor remoto
+# Define un actor
 @ray.remote
 class MyActorGen:
     def __init__(self):
@@ -39,7 +39,7 @@ class MyActorGen:
             # Iterar a través de todas las tablas en la página
             for table in soup.find_all('table'):
                 for row in table.find_all('tr'):
-                    # Verificar si la fila contiene el número 0001
+                    # Verificar si la fila contiene el número deseado
                     if num in row.get_text():
                         target_row = row
                         target_table = table
@@ -62,7 +62,7 @@ class MyActorGen:
                         # Extraer los datos relevantes de las celdas
                         numero = cells[0].text.strip()
                         nombre = cells[1].text.strip()
-                        japones = cells[3].text.strip()
+                        #japones = cells[3].text.strip()
 
                         tipos = []
                         for img in cells[2].find_all('img'):

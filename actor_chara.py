@@ -3,7 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-# Define un actor remoto
+# Define un actor
 @ray.remote
 class MyActorChara:
     def __init__(self):
